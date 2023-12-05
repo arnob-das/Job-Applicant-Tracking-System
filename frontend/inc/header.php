@@ -40,7 +40,7 @@
                         <a class="nav-link" href="#">Candidate Dashboard</a>
                     </li>
                     <li class="nav-item bg-primary rounded px-2">
-                        <a class="nav-link text-white" href="#">Sign In</a>
+                        <a class="nav-link text-white" href="/varsity/project/Job-Applicant-Tracking-System/frontend/login.php">Sign In</a>
                     </li>
                 </ul>
             </div>

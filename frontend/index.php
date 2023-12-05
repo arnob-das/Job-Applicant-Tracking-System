@@ -10,7 +10,7 @@
                     <p class="lead py-3">
                         Efficiently Manage Job Applications, Identify Top Talent, and Build Your Dream Team with Ease
                     </p>
-                    <button class="btn btn-primary me-3 px-3 py-2">Sign In</button>
+                    <a class="btn btn-primary me-3 px-3 py-2" href="/varsity/project/Job-Applicant-Tracking-System/frontend/login.php">Sign In</a>
                     <button class="btn btn-outline-primary px-3 py-2">Search Jobs</button>
                 </div>
                 <div class="col-md-6">
