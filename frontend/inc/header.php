@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,21 +33,42 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/varsity/project/Job-Applicant-Tracking-System/frontend/jobs.php">Jobs</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Post A Job</a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" href="#">Admin</a>
-                    </li> -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">JobAdvertiser Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Candidate Dashboard</a>
-                    </li>
-                    <li class="nav-item bg-primary rounded px-2">
-                        <a class="nav-link text-white" href="/varsity/project/Job-Applicant-Tracking-System/frontend/login.php">Sign In</a>
-                    </li>
+
+                    <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'jobAdvertiser') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Post A Job</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'jobAdvertiser') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">JobAdvertiser Dashboard</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'admin') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Admin Dashboard</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'candidate') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Candidate Dashboard</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (empty($_SESSION['userRole'])) : ?>
+                        <li class="nav-item bg-primary rounded px-2">
+                            <a class="nav-link text-white" href="/varsity/project/Job-Applicant-Tracking-System/frontend/login.php">Sign In</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['userRole']) && ($_SESSION['userRole'] == 'candidate' || $_SESSION['userRole'] == 'jobAdvertiser')) : ?>
+                        <li class="nav-item bg-primary rounded px-2">
+                            <a class="nav-link text-white" href="/varsity/project/Job-Applicant-Tracking-System/backend/actions/logout.php">Log out</a>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </div>
         </div>

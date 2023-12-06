@@ -11,7 +11,7 @@
                         Efficiently Manage Job Applications, Identify Top Talent, and Build Your Dream Team with Ease
                     </p>
                     <a class="btn btn-primary me-3 px-3 py-2" href="/varsity/project/Job-Applicant-Tracking-System/frontend/login.php">Sign In</a>
-                    <button class="btn btn-outline-primary px-3 py-2">Search Jobs</button>
+                    <a class="btn btn-outline-primary px-3 py-2" href="/varsity/project/Job-Applicant-Tracking-System/frontend/jobs.php">Search Jobs</a>
                 </div>
                 <div class="col-md-6">
                     <img src="./assets/bg.jpg" alt="background image" class="img-fluid">
