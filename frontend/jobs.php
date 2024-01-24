@@ -12,7 +12,7 @@ $result = $conn->query($sql);
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Job ID</th>
+               
                 <th>Job Title</th>
                 <th>Date Posted</th>
                 <th>Company</th>
@@ -26,7 +26,7 @@ $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td>{$row['JobId']}</td>";
+                    
                     echo "<td>{$row['JobTitle']}</td>";
                     echo "<td>{$row['dateposted']}</td>";
                     echo "<td>{$row['company']}</td>";
