@@ -4,8 +4,6 @@ session_start();
 
 include('../config/database.php');
 
-$errorMsg = '';
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullName = $_POST['fullName'];
@@ -26,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $emailCheckQuery = "SELECT * FROM JOBADVERTISER WHERE Email = '$email' UNION SELECT * FROM CANDIDATE WHERE Email = '$email'";
+    $emailCheckQuery = "SELECT Email FROM JOBADVERTISER WHERE Email = '$email' UNION SELECT Email FROM CANDIDATE WHERE Email = '$email'";
     $emailCheckResult = mysqli_query($conn, $emailCheckQuery);
 
     if (mysqli_num_rows($emailCheckResult) > 0) {
@@ -35,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    $contactNumberCheckQuery = "SELECT * FROM JOBADVERTISER WHERE ContactNo = '$contactNumber' UNION SELECT * FROM CANDIDATE WHERE ContactNo = '$contactNumber'";
+    $contactNumberCheckQuery = "SELECT ContactNo FROM JOBADVERTISER WHERE ContactNo = '$contactNumber' UNION SELECT ContactNo FROM CANDIDATE WHERE ContactNo = '$contactNumber'";
     $contactNumberCheckResult = mysqli_query($conn, $contactNumberCheckQuery);
 
     if (mysqli_num_rows($contactNumberCheckResult) > 0) {

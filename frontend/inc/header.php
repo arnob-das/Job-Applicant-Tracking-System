@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +35,7 @@ session_start();
 
                     <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'jobAdvertiser') : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Post A Job</a>
+                            <a class="nav-link" href="/varsity/project/Job-Applicant-Tracking-System/frontend/postAJob.php">Post A Job</a>
                         </li>
                     <?php endif; ?>
 
