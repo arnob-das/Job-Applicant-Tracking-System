@@ -26,6 +26,7 @@ CREATE TABLE JOBS(
     position varchar(50) not null,
     postedBy varchar(50),
     jobStatus varchar(20),
+    jobDetail varchar(255),
     FOREIGN KEY (postedBy) REFERENCES JOBADVERTISER(Email)
 );
 
