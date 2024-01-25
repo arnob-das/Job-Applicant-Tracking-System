@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $emailCheckQuery = "SELECT Email FROM JOBADVERTISER WHERE Email = '$email' UNION SELECT Email FROM CANDIDATE WHERE Email = '$email'";
     $emailCheckResult = mysqli_query($conn, $emailCheckQuery);
 
@@ -43,9 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($role === 'jobAdvertiser') {
-        $query = "INSERT INTO JOBADVERTISER (Email, FullName, Role, Password, ContactNo) VALUES ('$email', '$fullName', '$role', '$password', '$contactNumber')";
+        $query = "INSERT INTO JOBADVERTISER (Email, FullName, Role, Password, ContactNo) VALUES ('$email', '$fullName', '$role', '$hashedPassword', '$contactNumber')";
     } elseif ($role === 'candidate') {
-        $query = "INSERT INTO CANDIDATE (Email, FullName, Role, Password, ContactNo) VALUES ('$email', '$fullName', '$role', '$password', '$contactNumber')";
+        $query = "INSERT INTO CANDIDATE (Email, FullName, Role, Password, ContactNo) VALUES ('$email', '$fullName', '$role', '$hashedPassword', '$contactNumber')";
     } else {
         $_SESSION['registrationError'] = "Invalid role selected";
         header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/registration.php");
