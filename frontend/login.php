@@ -19,7 +19,7 @@ include('./inc/header.php');
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
                         <!-- Display error message if exists -->
                         <?php if (!empty($_SESSION['loginError'])) : ?>
                             <div class="alert alert-danger mt-3" role="alert">
