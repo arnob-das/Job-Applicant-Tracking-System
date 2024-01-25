@@ -7,41 +7,33 @@ $result = $conn->query($sql);
 ?>
 
 <div class="container mt-5">
-    <h2 class="mb-4">Jobs Information</h2>
+    <h2 class="mb-4 text-center">Jobs Information</h2>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
+    <div class="row">
+        <?php
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo '<div class="col-md-4 mb-4">';
+                echo '<div class="card h-100">';
+                echo '<div class="card-body">';
+                echo "<h5 class='card-title text-primary'>{$row['JobTitle']}</h5>";
+                echo "<p class='card-text'><strong>Date Posted:</strong> {$row['dateposted']}</p>";
+                echo "<p class='card-text'><strong>Company:</strong> {$row['company']}</p>";
+                echo "<p class='card-text'><strong>Salary:</strong> {$row['salary']}</p>";
+                echo "<p class='card-text'><strong>Position:</strong> {$row['position']}</p>";
                
-                <th>Job Title</th>
-                <th>Date Posted</th>
-                <th>Company</th>
-                <th>Salary</th>
-                <th>Position</th>
-                <th>Posted By</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    
-                    echo "<td>{$row['JobTitle']}</td>";
-                    echo "<td>{$row['dateposted']}</td>";
-                    echo "<td>{$row['company']}</td>";
-                    echo "<td>{$row['salary']}</td>";
-                    echo "<td>{$row['position']}</td>";
-                    echo "<td>{$row['postedBy']}</td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='7'>No jobs found</td></tr>";
+                echo '</div>';
+                echo '</div>';
+                echo '</div>';
             }
-            ?>
-        </tbody>
-    </table>
+        } else {
+            echo "<div class='col-md-12 text-center'><p>No jobs found</p></div>";
+        }
+        ?>
+    </div>
 </div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
