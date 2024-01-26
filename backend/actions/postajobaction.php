@@ -1,8 +1,6 @@
 <?php
 session_start();
 include('../config/database.php');
-echo $_SESSION['userEmail'];
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve form data
@@ -19,53 +17,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+    // Encode special characters in jobDetail for safe storage in the database
+    $jobDetail = htmlspecialchars($jobDetail, ENT_QUOTES, 'UTF-8');
+
     $postedBy = $_SESSION['userEmail'];
     $jobStatus = 'pending';
 
-    $query = "INSERT INTO JOBS (JobTitle, dateposted, company, salary, position, jobDetail, postedBy, jobStatus)
-                  VALUES ('$jobTitle', NOW(), '$company', $salary, '$position','$jobDetail', '$postedBy', '$jobStatus')";
+    // Use prepared statement to avoid SQL injection
+    $query = "INSERT INTO JOBS (JobTitle, dateposted, company, salary, position, jobDetail, postedBy) VALUES (?, NOW(), ?, ?, ?, ?, ?)";
 
-    $result = mysqli_query($conn, $query);
+    $stmt = mysqli_prepare($conn, $query);
 
-    if ($result) {
-        // Job posting successful
-        $_SESSION['jobPostError'] = "";
-        header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/postajob.php");
-        exit();
+    if ($stmt) {
+        // Bind parameters
+        mysqli_stmt_bind_param($stmt, "ssdsss", $jobTitle, $company, $salary, $position, $jobDetail, $postedBy);
+
+        // Execute the statement
+        $result = mysqli_stmt_execute($stmt);
+
+        if ($result) {
+            // Job posting successful
+            $_SESSION['jobPostError'] = "";
+            header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/postajob.php");
+            exit();
+        } else {
+            // Job posting failed
+            $_SESSION['jobPostError'] = "Error posting the job. Please try again.";
+            header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/postajob.php");
+            exit();
+        }
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
     } else {
-        // Job posting failed
+        // Error in prepared statement
         $_SESSION['jobPostError'] = "Error posting the job. Please try again.";
         header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/postajob.php");
         exit();
     }
-
-    // // Check if the user is logged in and has the necessary role
-    // if (isset($_SESSION['userRole']) && $_SESSION['userRole'] === 'jobAdvertiser') {
-    //     $postedBy = $_SESSION['userEmail']; // Assuming the user's email is stored in the session
-    //     $jobStatus = 'pending'; // You can set a default status or modify it as needed
-
-    //     // Insert job posting into the database
-    //     $query = "INSERT INTO JOBS (JobTitle, dateposted, company, salary, position, jobDetail, postedBy, jobStatus)
-    //               VALUES ('$jobTitle', NOW(), '$company', $salary, '$position','$jobDetail', '$postedBy', '$jobStatus')";
-
-    //     $result = mysqli_query($conn, $query);
-
-    //     if ($result) {
-    //         // Job posting successful
-    //         $_SESSION['jobPostError'] = "";
-    //         header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/postajob.php");
-    //         exit();
-    //     } else {
-    //         // Job posting failed
-    //         $_SESSION['jobPostError'] = "Error posting the job. Please try again.";
-    //         header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/postajob.php");
-    //         exit();
-    //     }
-    // } else {
-    //     // Redirect if the user doesn't have the necessary role
-    //     header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/index.php");
-    //     exit();
-    // }
 } else {
     // Redirect if the form is not submitted using POST method
     header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/postajob.php");

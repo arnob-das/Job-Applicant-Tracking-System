@@ -14,7 +14,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="frontend/css/signin.css">
     <title>Job Applicant Tracking System</title>
-    
+
 </head>
 
 <body class="">
@@ -35,6 +35,12 @@ session_start();
                         <a class="nav-link btn btn-outline-light text-primary border border-primary mx-2" href="/varsity/project/Job-Applicant-Tracking-System/frontend/jobs.php">Jobs</a>
                     </li>
 
+                    <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'admin') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-light text-primary border border-primary mx-2" href="/varsity/project/Job-Applicant-Tracking-System/frontend/admin.php">Admin Dashboard</a>
+                        </li>
+                    <?php endif; ?>
+
                     <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'jobAdvertiser') : ?>
                         <li class="nav-item">
                             <a class="nav-link btn btn-outline-light text-primary border border-primary mx-2" href="/varsity/project/Job-Applicant-Tracking-System/frontend/postAJob.php">Post A Job</a>
@@ -43,19 +49,13 @@ session_start();
 
                     <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'jobAdvertiser') : ?>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-light text-primary border border-primary mx-2" href="#">JobAdvertiser Dashboard</a>
-                        </li>
-                    <?php endif; ?>
-
-                    <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'admin') : ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Admin Dashboard</a>
+                            <a class="nav-link btn btn-outline-light text-primary border border-primary mx-2" href="jobAdvertiserDashboard.php">JobAdvertiser Dashboard</a>
                         </li>
                     <?php endif; ?>
 
                     <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'candidate') : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Candidate Dashboard</a>
+                            <a class="nav-link btn btn-outline-light text-primary border border-primary mx-2" href="#">Candidate Dashboard</a>
                         </li>
                     <?php endif; ?>
 
@@ -65,7 +65,7 @@ session_start();
                         </li>
                     <?php endif; ?>
 
-                    <?php if (isset($_SESSION['userRole']) && ($_SESSION['userRole'] == 'candidate' || $_SESSION['userRole'] == 'jobAdvertiser')) : ?>
+                    <?php if (isset($_SESSION['userRole']) && ($_SESSION['userRole'] == 'candidate' || $_SESSION['userRole'] == 'jobAdvertiser' || $_SESSION['userRole'] == 'admin')) : ?>
                         <li class="nav-item bg-primary rounded px-2">
                             <a class="nav-link text-white btn-lg" href="/varsity/project/Job-Applicant-Tracking-System/backend/actions/logout.php">Log out</a>
                         </li>

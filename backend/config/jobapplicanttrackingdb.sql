@@ -5,12 +5,23 @@ CREATE TABLE JOBADVERTISER(
     FullName varchar(50),
     Role varchar(20),
     Password varchar(20),
-    ContactNo varchar(11)
+    ContactNo varchar(11),
+    Verify BOOLEAN DEFAULT FALSE
 );
+
 
 CREATE TABLE CANDIDATE(
     candidateId INT AUTO_INCREMENT PRIMARY KEY,
     Email varchar(50) unique,
+    FullName varchar(50),
+    Role varchar(20),
+    Password varchar(20),
+    ContactNo varchar(11),
+    Verify BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE admin(
+    Email varchar(50) PRIMARY KEY,
     FullName varchar(50),
     Role varchar(20),
     Password varchar(20),
@@ -25,8 +36,8 @@ CREATE TABLE JOBS(
     salary int not null,
     position varchar(50) not null,
     postedBy varchar(50),
-    jobStatus varchar(20),
     jobDetail varchar(255),
+    Verify BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (postedBy) REFERENCES JOBADVERTISER(Email)
 );
 

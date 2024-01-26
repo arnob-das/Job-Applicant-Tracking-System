@@ -15,8 +15,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
+    // if the user is admin
+    $emailCheckQuery = "SELECT * FROM ADMIN WHERE Email = '$email' and password='$password'";
+    $emailCheckResult = mysqli_query($conn, $emailCheckQuery);
+
+    if (mysqli_num_rows($emailCheckResult)==1) {
+        $_SESSION['userEmail'] = $email;
+        $_SESSION['userRole'] = 'admin';
+        $_SESSION['loginError'] = ''; // clear the error message
+        header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/index.php");
+        exit();
+    } else {
+        $_SESSION['loginError'] = "Email or Password is not correct!";
+        header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/login.php");
+        //exit();
+    }
+
     // if the user is job advertiser
-    $emailCheckQuery = "SELECT * FROM JOBADVERTISER WHERE Email = '$email' and password='$password'";
+    $emailCheckQuery = "SELECT * FROM JOBADVERTISER WHERE Email = '$email' AND password='$password'";
     $emailCheckResult = mysqli_query($conn, $emailCheckQuery);
 
     if (mysqli_num_rows($emailCheckResult) == 1) {
@@ -25,13 +41,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['loginError'] = ''; // clear the error message
         header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/index.php");
         exit();
+    }else {
+        $_SESSION['loginError'] = "Email or Password is not correct!";
+        header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/login.php");
+        //exit();
     }
 
     // if the user is candidate
-    $emailCheckQuery = "SELECT * FROM CANDIDATE WHERE Email = '$email' and password='$password'";
+    $emailCheckQuery = "SELECT * FROM CANDIDATE WHERE Email = '$email' AND password='$password'";
     $emailCheckResult = mysqli_query($conn, $emailCheckQuery);
 
-    if (mysqli_num_rows($emailCheckResult)) {
+    if (mysqli_num_rows($emailCheckResult)==1) {
         $_SESSION['userEmail'] = $email;
         $_SESSION['userRole'] = 'candidate';
         $_SESSION['loginError'] = ''; // clear the error message
@@ -40,8 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $_SESSION['loginError'] = "Email or Password is not correct!";
         header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/login.php");
-        exit();
+        //exit();
     }
+
+
 
     // Close the database connection
     mysqli_close($conn);

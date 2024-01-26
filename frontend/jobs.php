@@ -2,7 +2,7 @@
 include('./inc/header.php');
 include('../backend/config/database.php');
 
-$sql = "SELECT * FROM JOBS";
+$sql = "SELECT * FROM JOBS where Verify = true";
 $result = $conn->query($sql);
 ?>
 
@@ -14,6 +14,7 @@ $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="col-md-4 mb-4">';
+                echo "<a href='jobDetail.php?jobId={$row['JobId']}' class='text-decoration-none'>";
                 echo '<div class="card h-100">';
                 echo '<div class="card-body">';
                 echo "<h5 class='card-title text-primary'>{$row['JobTitle']}</h5>";
@@ -21,9 +22,9 @@ $result = $conn->query($sql);
                 echo "<p class='card-text'><strong>Company:</strong> {$row['company']}</p>";
                 echo "<p class='card-text'><strong>Salary:</strong> {$row['salary']}</p>";
                 echo "<p class='card-text'><strong>Position:</strong> {$row['position']}</p>";
-               
                 echo '</div>';
                 echo '</div>';
+                echo '</a>';
                 echo '</div>';
             }
         } else {
@@ -33,12 +34,8 @@ $result = $conn->query($sql);
     </div>
 </div>
 
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
 
 <?php
