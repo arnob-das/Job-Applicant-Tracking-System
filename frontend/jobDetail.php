@@ -33,7 +33,11 @@ if (isset($_GET['jobId'])) {
                             <p><strong>Salary:</strong> <?php echo $jobDetails['salary']; ?></p>
                             <p><strong>Position:</strong> <?php echo $jobDetails['position']; ?></p>
                             <p><strong>Job Detail:</strong> <?php echo $jobDetails['jobDetail']; ?></p>
-                            <a href="jobApply.php?jobId=<?php echo $jobId; ?>" class="btn btn-primary">Apply</a>
+                            <?php
+                            if ($_SESSION['userRole'] == "candidate") {
+                                echo "<a class='btn btn-primary' href='jobApply.php?jobId={$jobId}'>Apply</a>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

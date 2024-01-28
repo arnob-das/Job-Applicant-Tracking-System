@@ -2,6 +2,13 @@
 session_start();
 include('../config/database.php');
 
+if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'candidate') {
+    // job advertiser is logged in
+} else {
+    header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/error.php");
+    exit();
+}
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve form data
@@ -22,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Generate the new filename
             $newFileName = $candidateId . '_' . $jobId . '.pdf';
-            $targetDirectory = '../uploads/'; // Specify your upload directory
+            $targetDirectory = 'http://localhost/varsity/project/Job-Applicant-Tracking-System/backend/uploads/'; // Specify your upload directory
             $cvFilePath = $targetDirectory . $newFileName;
 
             // Update the CvLink in the APPLY table with the new filename
@@ -41,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     move_uploaded_file($_FILES['cv']['tmp_name'], $cvFilePath);
                     $_SESSION['applyError'] = '';
                     header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/jobs.php");
-
                 } else {
                     $_SESSION['applyError'] = 'Error submitting the application. Please try again.';
                 }

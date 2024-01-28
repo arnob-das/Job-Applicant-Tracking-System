@@ -36,6 +36,7 @@ CREATE TABLE JOBS(
     position varchar(50) not null,
     postedBy varchar(50),
     jobDetail varchar(255),
+    jobStatus varchar(20),
     Verify BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (postedBy) REFERENCES JOBADVERTISER(Email)
 );
@@ -50,6 +51,15 @@ CREATE TABLE APPLY(
     FOREIGN KEY (JobId) REFERENCES JOBS(JobId),
     FOREIGN KEY (candidateId) REFERENCES CANDIDATE(candidateId)
 );
+
+CREATE TABLE Notifications (
+    notificationId INT AUTO_INCREMENT PRIMARY KEY,
+    candidateId INT,
+    message TEXT,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (candidateId) REFERENCES CANDIDATE(candidateId)
+);
+
 
 
 

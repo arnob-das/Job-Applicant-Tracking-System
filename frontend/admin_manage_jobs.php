@@ -2,10 +2,17 @@
 include('./inc/header.php');
 include('../backend/config/database.php');
 ?>
-
-<!-- Add Bootstrap CSS and JS links if not already included -->
-
 <?php
+
+
+
+if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'admin') {
+    // admin is logged in
+} else {
+    header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/index.php");
+    exit();
+}
+
 // Handle actions (approve, reject, delete)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action']) && isset($_POST['jobId'])) {

@@ -3,7 +3,7 @@ session_start();
 include('../config/database.php');
 
 if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'jobAdvertiser') {
-    // Admin is logged in
+    // job advertiser is logged in
 } else {
     header("Location: http://localhost/varsity/project/Job-Applicant-Tracking-System/frontend/error.php");
     exit();

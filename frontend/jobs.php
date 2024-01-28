@@ -2,7 +2,7 @@
 include('./inc/header.php');
 include('../backend/config/database.php');
 
-$sql = "SELECT * FROM JOBS where Verify = true";
+$sql = "SELECT * FROM JOBS where Verify = true and jobStatus = 'open'";
 $result = $conn->query($sql);
 ?>
 

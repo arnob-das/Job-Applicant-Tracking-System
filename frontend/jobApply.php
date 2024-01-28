@@ -22,7 +22,7 @@ if (isset($_GET['jobId'])) {
 
             <button type="submit" class="btn btn-primary">Submit Application</button>
             <?php
-            echo $_SESSION['applyError'];
+            //echo $_SESSION['applyError'];
             ?>
         </form>
     </div>
