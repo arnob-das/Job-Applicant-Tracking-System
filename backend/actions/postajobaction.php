@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jobStatus = 'pending';
 
     // Use prepared statement to avoid SQL injection
-    $query = "INSERT INTO JOBS (JobTitle, dateposted, company, salary, position, jobDetail, postedBy) VALUES (?, NOW(), ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO JOBS (JobTitle, dateposted, company, salary, position, jobDetail, postedBy, jobStatus) VALUES (?, NOW(), ?, ?, ?, ?, ?, 'open')";
 
     $stmt = mysqli_prepare($conn, $query);
 
