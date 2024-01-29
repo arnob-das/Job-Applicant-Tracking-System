@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
+<footer class="bg-dark text-light text-center py-3">
+    <div class="container">
+        <p>&copy; 2024 Job Applicant Tracking System. All rights reserved.</p>
+        <p>Developed By Arnob, Anika, Fargin</p>
+    </div>
+</footer>
 </body>
 </html>

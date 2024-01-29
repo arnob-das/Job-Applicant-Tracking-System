@@ -65,6 +65,4 @@ if (isset($_GET['jobId'])) {
     header("Location: error.php");
     exit();
 }
-
-include('./inc/footer.php');
 ?>

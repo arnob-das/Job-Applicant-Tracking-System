@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $deleteJobsQuery = "DELETE FROM JOBS WHERE postedBy = '$jobAdvertiserId'";
                 mysqli_query($conn, $deleteJobsQuery);
 
-                // Now you can safely delete the job advertiser
                 $deleteQuery = "DELETE FROM JOBADVERTISER WHERE Email = '$jobAdvertiserId'";
                 mysqli_query($conn, $deleteQuery);
                 break;
@@ -82,3 +81,4 @@ $result = mysqli_query($conn, $selectQuery);
         </tbody>
     </table>
 </div>
+<?php include('./inc/footer.php'); ?>

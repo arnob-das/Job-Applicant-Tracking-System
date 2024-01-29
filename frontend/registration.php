@@ -43,6 +43,7 @@ include('./inc/header.php');
         </div>
     </div>
 </div>
+<?php include('./inc/footer.php') ?>
 </body>
 
 </html>

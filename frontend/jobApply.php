@@ -26,6 +26,7 @@ if (isset($_GET['jobId'])) {
             ?>
         </form>
     </div>
+    
 <?php
 } else {
     // jobId not provided, redirect to an error page or handle accordingly

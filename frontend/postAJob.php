@@ -41,3 +41,6 @@ if (isset($_SESSION['userRole']) && $_SESSION['userRole'] != 'jobAdvertiser') {
         </div>
     </div>
 </div>
+<?php include('./inc/footer.php') ?>
+</body>
+</html>

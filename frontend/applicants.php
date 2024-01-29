@@ -65,11 +65,10 @@ if (isset($_GET['jobId'])) {
             <p>No applicants for this job yet.</p>
         <?php } ?>
     </div>
+    
 
 <?php
 } else {
     echo "<p>Error: JobId not provided.</p>";
 }
-
-include('./inc/footer.php');
 ?>

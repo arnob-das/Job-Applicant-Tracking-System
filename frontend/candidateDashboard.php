@@ -58,5 +58,4 @@ if (isset($_SESSION['userEmail']) && $_SESSION['userRole'] == 'candidate') {
     exit();
 }
 
-include('./inc/footer.php');
 ?>

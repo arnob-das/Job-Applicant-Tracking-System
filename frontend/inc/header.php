@@ -59,6 +59,12 @@ session_start();
                         </li>
                     <?php endif; ?>
 
+                    <?php if (isset($_SESSION['userRole']) && $_SESSION['userRole'] == 'candidate') : ?>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-light text-primary border border-primary mx-2" href="candidateNotifications.php">Notifications</a>
+                        </li>
+                    <?php endif; ?>
+
                     <?php if (empty($_SESSION['userRole'])) : ?>
                         <li class="nav-item bg-primary rounded px-2">
                             <a class="nav-link text-white" href="/varsity/project/Job-Applicant-Tracking-System/frontend/login.php">Sign In</a>
